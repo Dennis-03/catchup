@@ -1,0 +1,21 @@
+// Cjoin - Form Submit Handler
+//Sample code for showing a form in a command / bot / function / messageaction
+inputs = list();
+inputs.add({"type":"text","name":"uidf","label":"CatchUP","hint":"Please enter the CatchUp ID","placeholder":"Enter the CatchUp ID","mandatory":true,"value":""});
+form = {"type":"form","title":"Catchup","hint":"Join the Catchup","name":"ID","version":1,"button_label":"Join","actions":{"submit":{"type":"invoke.function","name":"userjoin"}},"inputs":inputs};
+return form;
+// inputs.add({"type":"text","format":"email","name":"email","label":"Email","hint":"Enter your email address","placeholder":"scott.fisher@zylker.com","mandatory":true,"value":"scott.fisher@zylker.com"});
+// inputs.add({"type":"select","trigger_on_change":true,"name":"asset-type","label":"Asset Type","hint":"Choose your request asset type.","placeholder":"Mobile","mandatory":true,"options":{{"label":"Laptop","value":"laptop"},{"label":"Mobile","value":"mobile"}}});
+/*response = Map();
+formValues = form.get("values");
+info formValues;
+if(formValues.get("asset-type").get("value") == "mobile")
+{
+	response = {"text":"Hi " + formValues.get("username") + ", thanks for raising your request. Your request will be processed based on the device availability.","card":{"title":"Asset Request"},"slides":{{"type":"label","title":"","data":{{"Asset Type":formValues.get("asset-type").get("label")},{"Preferred OS ":formValues.get("mobile-os").get("label")},{"Preferred Device":formValues.get("mobile-list").get("label")}}}}};
+}
+else
+{
+	response = {"text":"Hi " + formValues.get("username") + ", thanks for raising your request. Your request will be processed based on the device availability.","card":{"title":"Asset Request"},"slides":{{"type":"label","title":"","data":{{"Asset Type":formValues.get("asset-type").get("label")},{"OS/Device Preferred":formValues.get("os-type").get("label")}}}}};
+}
+return response;
+*/

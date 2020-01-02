@@ -1,0 +1,34 @@
+
+//Sample code for showing a form in a command / bot / function / messageaction
+inputs = list();
+// name = user.get("first_name");
+// inputs.add({"type":"text","name":"username","label":"Name","hint":"Please enter your name","placeholder":"The person Who is arranging","mandatory":true,"value":name});
+inputs.add({"type":"text","name":"place","label":"Place","hint":"Enter the place","placeholder":"Where is the meetup?","mandatory":true,"value":""});
+inputs.add({"type":"number","name":"hr","label":"TIME","hint":"Enter the time","placeholder":"HOURS","mandatory":true,"value":""});
+inputs.add({"type":"number","name":"min","label":"TIME","hint":"Enter the time","placeholder":"MINUTES","value":""});
+// inputs.add({"type":"text","format":"email","name":"email","label":"Email","hint":"Enter your email address","placeholder":"scott.fisher@zylker.com","mandatory":true,"value":"scott.fisher@zylker.com"});
+//inputs.add({"type":"select","trigger_on_change":false,"name":"asset-type","label":"Asset Type","hint":"Choose your request asset type.","placeholder":"Mobile","mandatory":true,"options":{{"label":"Laptop","value":"laptop"},{"label":"Mobile","value":"mobile"}}});
+form = {"type":"form","title":"Catch UP","hint":"","name":"ID","version":1,"button_label":"Submit","actions":{"submit":{"type":"invoke.function","name":"DBsave"}},"inputs":inputs};
+return form;
+// values_map = Map();
+// response = Map();
+// info form;
+// place = form.get("values").get("place");
+// time = form.get("values").get("time");
+// values_map.put("name",name);
+// values_map.put("area",place);
+// values_map.put("time",time);
+// values_map.put("intrest","TRUE");
+// response_map = zoho.cliq.createRecord("List",values_map);
+// response = Map();
+// formValues = form.get("values");
+// info formValues;
+// if(formValues.get("asset-type").get("value") == "mobile")
+// {
+// 	response = {"text":"Hi " + formValues.get("username") + ", thanks for raising your request. Your request will be processed based on the device availability.","card":{"title":"Asset Request"},"slides":{{"type":"label","title":"","data":{{"Asset Type":formValues.get("asset-type").get("label")},{"Preferred OS ":formValues.get("mobile-os").get("label")},{"Preferred Device":formValues.get("mobile-list").get("label")}}}}};
+// }
+// else
+// {
+// 	response = {"text":"Hi " + formValues.get("username") + ", thanks for raising your request. Your request will be processed based on the device availability.","card":{"title":"Asset Request"},"slides":{{"type":"label","title":"","data":{{"Asset Type":formValues.get("asset-type").get("label")},{"OS/Device Preferred":formValues.get("os-type").get("label")}}}}};
+// }
+// return response;

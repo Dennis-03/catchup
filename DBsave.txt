@@ -1,0 +1,46 @@
+//DBsave - Form submit handler
+values_map = Map();
+response = Map();
+info form;
+//name = form.get("values").get("name");
+lead = user.get("first_name");
+pid = user.get("id");
+place = form.get("values").get("place");
+hr = form.get("values").get("hr");
+min = form.get("values").get("min");
+uid = place + hr + min;
+values_map.put("pid",pid);
+values_map.put("min",min);
+values_map.put("hr",hr);
+values_map.put("lead",lead);
+values_map.put("uid",uid);
+values_map.put("names",lead);
+values_map.put("place",place);
+response_map = zoho.cliq.createRecord("listppl",values_map);
+// response_map = zoho.cliq.createRecord("List",values_map);
+// command = {"text":"Hey!! a casual meet by " + name + " invites you to join " + place + " at " + time + ".Will you join?","card":{"theme":"modern-inline"},"slides":{{"type":"table","styles":{"width":{100}},"data":{"headers":{"Who are comming!"},"rows":{{"Who are comming!":place}}}}},"buttons":{{"label":" Join","type":"+","action":{"type":"invoke.function","data":{"name":"Cjoin"}}}}};
+// //===============================================
+// response = Map();
+// query_map = Map();
+// criteria_string = "names !=";
+// query_map.put("criteria",criteria_string);
+// response_map = zoho.cliq.getRecords("listppl",query_map);
+// if(response_map.get("status").equalsIgnoreCase("SUCCESS") && response_map.get("list").size() > 0)
+// {
+// 	requestList = response_map.get("list");
+// }
+// info response_map;
+// info requestList;
+// rows = List();
+// for each  responseItem in requestList
+// {
+// 	row = Map();
+// 	row.put("Who are coming!",responseItem.get("names"));
+// 	rows.add(row);
+// }
+// table = {"type":"table","title":"","data":{"headers":{"Who are coming!"},"rows":rows}};
+// response = {"text":"Hey!! a casual meet by " + name + " invites you to join " + place + " at " + hr + ":" + min + ".Will you join? \nJoin ID is " + uid + "","card":{"theme":"modern-inline","title":"CATCH UP"},"slides":{table},"buttons":{{"label":" Join","type":"+","action":{"type":"invoke.function","data":{"name":"Cjoin"}}}}};
+// return response;
+//--------------------------------------------------
+command = {"text":"Hey!! a casual meet by " + lead + " invites you to join " + place + " at " + hr + ":" + min + ".Will you join?\nThe CatchUp ID is '" + uid + "'.","card":{"theme":"modern-inline"},"buttons":{{"label":" Join","type":"+","action":{"type":"invoke.function","data":{"name":"Cjoin"}}}}};
+return command;

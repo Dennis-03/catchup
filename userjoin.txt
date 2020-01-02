@@ -1,0 +1,74 @@
+//userjoin _ Form submit handler
+values_map = Map();
+response = Map();
+uidf = form.get("values").get("uidf");
+info uidf;
+name = user.get("first_name");
+pidf = user.get("id");
+// response = {"text":"Value is" + uid + "" + name};
+query_map = Map();
+criteria_string = "pid==" + pidf;
+query_map.put("criteria",criteria_string);
+response_map = zoho.cliq.getRecords("listppl",query_map);
+uid = response_map.get("list").get(0).get("uid");
+// pid = 100;
+if(response_map.get("status").equalsIgnoreCase("SUCCESS") && response_map.get("list").size() > 0 && uid == uidf)
+{
+	response = {"text":"You are already in the CATCHUP!!"};
+}
+else
+{
+	//======================================
+	values_map.put("place","");
+	values_map.put("lead","");
+	values_map.put("uid",uidf);
+	values_map.put("pid",pidf);
+	values_map.put("min","00");
+	values_map.put("hr","0");
+	values_map.put("names",name);
+	response_map = zoho.cliq.createRecord("listppl",values_map);
+	query_map = Map();
+	criteria_string = "uid==" + uidf;
+	query_map.put("criteria",criteria_string);
+	response_map = zoho.cliq.getRecords("listppl",query_map);
+	uid = response_map.get("list").get(0).get("uid");
+	if(response_map.get("status").equalsIgnoreCase("SUCCESS") && response_map.get("list").size() > 0)
+	{
+		uid = response_map.get("list").get(0).get("uid");
+		if(uidf == uid)
+		{
+			requestList = response_map.get("list");
+		}
+	}
+	info response_map;
+	info requestList;
+	// Iterate the record list to display them in a tabular format in the message card. 
+	rows = List();
+	for each  responseItem in requestList
+	{
+		row = Map();
+		row.put("Who are coming!",responseItem.get("names"));
+		rows.add(row);
+	}
+	table = {"type":"table","title":"","data":{"headers":{"Who are coming!"},"rows":rows}};
+	query_map = Map();
+	criteria_string = "place!=";
+	query_map.put("criteria",criteria_string);
+	response_map = zoho.cliq.getRecords("listppl",query_map);
+	record_id = 0;
+	if(response_map.get("status").equalsIgnoreCase("SUCCESS") && response_map.get("list").size() > 0)
+	{
+		uid = response_map.get("list").get(0).get("uid");
+		if(uidf == uid)
+		{
+			lead = response_map.get("list").get(0).get("lead");
+			hr = response_map.get("list").get(0).get("hr");
+			min = response_map.get("list").get(0).get("min");
+			place = response_map.get("list").get(0).get("place");
+		}
+	}
+	table = {"type":"table","title":"","data":{"headers":{"Who are coming!"},"rows":rows}};
+	response = {"text":"Hey!! a casual meet by " + lead + " invites you to join " + place + " at " + hr + ":" + min + ".Will you join?\nThe CatchUp ID is '" + uidf + "'.","card":{"theme":"modern-inline","title":"Catch UP"},"slides":{table},"buttons":{{"label":" Join","type":"+","action":{"type":"invoke.function","data":{"name":"Cjoin"}}}}};
+	//=============
+}
+return response;
